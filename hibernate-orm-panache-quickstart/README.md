@@ -101,6 +101,22 @@ N.B. This implies all dependencies have been compiled to native;
 that's a whole lot of stuff: from the bytecode enhancements that Panache
 applies to your entities, to the lower level essential components such as the PostgreSQL JDBC driver, the Undertow webserver.
 
+### Run Natively as a Docker image
+
+This Dockerfile is used in order to build a container that runs the Quarkus application in native (no JVM) mode
+
+ Before building the docker image run:
+
+ > mvn package -Pnative -Dquarkus.native.container-build=true
+
+ Then, build the image with:
+
+> docker build -f src/main/docker/Dockerfile.native -t quarkus/hibernate-orm-panache-resteasy .
+
+Then run the container using:
+
+> docker run --net=host -i --rm -p 8080:8080 quarkus/hibernate-orm-panache-resteasy
+
 ## See the demo in your browser
 
 Navigate to:
